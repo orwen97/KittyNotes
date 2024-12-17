@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitty Notes</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header><h1>Kitty-Notes of the day</h1></header>
+    <main>
+        <form method="get" id="form">
+            <label for="task">Tasks to do:</label>
+            <input type="text" id="task" name="task" placeholder="Introduce your day's task" required>
+            <label for="time">Time:</label>
+            <input type="number" id="time" name="time" placeholder="00" required>
+            <button class="btnAdd">Add</button>
+        </form>
+        <h3>Let's Go!</h3>
+        <section>
+            <ol class="showTasks">
+            </ol>
+        </section>
+        <button id="endBtn">End Day</button>
+    </main>
+    <footer></footer>
+    <script src="/js/main.js"></script>
+</body>
+</html>
