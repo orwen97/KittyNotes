@@ -17,8 +17,7 @@
 // console.log(allTask)
 
 class Task {
-    constructor(time, description) {
-        this.time = time,
+    constructor(description) {
             this.description = description,
             this.done = false;
     }
@@ -31,12 +30,11 @@ class Task {
 
 let allTasks = [];
 
-let form = document.querySelector("#form");
-let inputTask = document.querySelector("#task");
-let inputTime = document.querySelector("#time");
-let btnAdd = document.querySelector(".btnAdd");
+const form = document.querySelector("#form");
+const inputTask = document.querySelector("#task");
+const btnAdd = document.querySelector(".btnAdd");
 const showTasks = document.querySelector(".showTasks")
-let endBtn = document.querySelector("#endBtn");
+const endBtn = document.querySelector("#endBtn");
 
 //get back Storage on dom
 
@@ -45,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     allTasks.push(...storedTasks);
     showTasks.innerHTML = "";
     allTasks.forEach(task => {
-        showTasks.innerHTML += `<li>${task.description} at ${task.time}hs</li>`;
+        showTasks.innerHTML += `<li>${task.description}</li>`;
     });
 })
 
@@ -54,32 +52,21 @@ document.addEventListener("DOMContentLoaded", () => {
 btnAdd.addEventListener("click", (event) => {
     event.preventDefault();
     let inputTaskValue = inputTask.value;
-    let inputTimeValue = inputTime.value;
-    const newTask = new Task(inputTimeValue, inputTaskValue);
+    const newTask = new Task(inputTaskValue);
     allTasks.push(newTask);
     form.reset();
     localStorage.setItem("task", JSON.stringify(allTasks));
     showTasks.innerHTML = "";
-    // console.log(`Your task is: ${inputTaskValue} at: ${inputTimeValue}hs`);
+    // console.log(`Your task is: ${inputTaskValue}`);
     // console.log(allTasks);
 
     allTasks.forEach(newTask => {
-        showTasks.innerHTML += `<li id = "list">${newTask.description} at ${newTask.time}hs</li>`;
+        showTasks.innerHTML += `<li id = "list">
+                                    <img src="/assets/uncheck-box.png">
+                                    <p>${newTask.description}</p>
+                                    <img src="/assets/delete-icon.png">
+                                </li>`;
     });
-});
-
-//function for finished tasks
-
-showTasks.addEventListener("click", (event) => {
-    if (event.target.tagName === "LI") {
-        event.target.classList.toggle("done");
-
-        const taskIndex = [...showTasks.children].indexOf(event.target);
-
-        allTasks[taskIndex].done = !allTasks[taskIndex].done;
-        localStorage.setItem("task", JSON.stringify(allTasks));
-
-    }
 });
 
 endBtn.addEventListener("click", (event) => {

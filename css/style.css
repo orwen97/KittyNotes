@@ -4,11 +4,71 @@
     box-sizing: border-box;
 }
 
-.done {
-    color: rgb(18, 89, 18);
-    text-decoration: line-through
+:root {
+    --color-primary:  #A20026;
+    --bg-color: #FFEEEE;
+    --tags-color: #E9CFD1;
+    --nav-bar-color: #F6D3D3;
 }
 
 li{
     cursor: pointer;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+header h1 {
+    display: flex;
+    background-color: var(--color-primary);
+    color: white;
+    width: auto;
+    height: 5.3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.navBar{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--nav-bar-color);
+    height: 1.6rem;
+}
+.navBar ul{
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    padding-left: 0.5rem;
+    align-items: center;
+}
+.navBar ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.7rem;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.showTasks{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.subtitle {
+    display: flex;
+    padding: 1rem;
+    text-decoration: underline;
+    justify-content: center;
+}
+
+.endBtn {
+    display: flex;
+    justify-content: center;
 }

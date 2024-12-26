@@ -8,21 +8,33 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header><h1>Kitty-Notes of the day</h1></header>
+    <header>
+        <h1>Kitty Notes</h1>
+        <nav>
+            <div class="navBar">
+                <ul>
+                    <li><a href="#">To-do list</a></li>
+                    <li><a href="">Notes</a></li>
+                    <li><a href="">Favorites</a></li>
+                    <li><a href="">Settings</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <main>
         <form method="get" id="form">
             <label for="task">Tasks to do:</label>
             <input type="text" id="task" name="task" placeholder="Introduce your day's task" required>
-            <label for="time">Time:</label>
-            <input type="number" id="time" name="time" placeholder="00" required>
             <button class="btnAdd">Add</button>
         </form>
-        <h3>Let's Go!</h3>
+        <h3 class="subtitle">Let's Go!</h3>
         <section>
             <ol class="showTasks">
             </ol>
         </section>
-        <button id="endBtn">End Day</button>
+        <div class="endBtn">
+            <button id="endBtn">End Day</button>
+        </div>
     </main>
     <footer></footer>
     <script src="js/index.js"></script>
