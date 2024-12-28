@@ -43,8 +43,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     allTasks.push(...storedTasks);
     showTasks.innerHTML = "";
     allTasks.forEach(newTask => {
-        showTasks.innerHTML += `<li id = "list">
-                                    <img src= "/assets/uncheck-box.png" class= "uncheck">
+        showTasks.innerHTML += `<li id = "list-${newTask.id}">
+                                    <img src= "${newTask.done ? '/assets/check_box.png' : '/assets/uncheck-box.png'}" class= "uncheck">
                                     <p>${newTask.description}</p>
                                     <p>${newTask.id}</p>
                                     <img src="/assets/delete-icon.png" class= "delete">
@@ -63,11 +63,9 @@ btnAdd.addEventListener("click", (event) => {
     form.reset();
     localStorage.setItem("task", JSON.stringify(allTasks));
     showTasks.innerHTML = "";
-    // console.log(`Your task is: ${inputTaskValue}`);
-    // console.log(allTasks);
 
     allTasks.forEach(newTask => {
-        showTasks.innerHTML += `<li id = "list">
+        showTasks.innerHTML += `<li id = "list-${newTask.id}">
                                     <img src= "/assets/uncheck-box.png" class= "uncheck">
                                     <p>${newTask.description}</p>
                                     <p>${newTask.id}</p>
@@ -86,14 +84,22 @@ endBtn.addEventListener("click", (event) => {
 
 function addUncheckListener() {
     const uncheck = document.querySelectorAll(".uncheck");
+
     uncheck.forEach(img => {
         img.addEventListener("click", function(event) {
             const isActive = img.classList.toggle('active');
-            if (isActive) {
-                img.src = "/assets/check_box.png";
-            } else {
-                img.src = "/assets/uncheck-box.png";
-            };
+            const taskId = img.parentElement.id;
+            const taskFound = allTasks.find(i => `list-${i.id}` === taskId);
+            if(taskFound) {
+                if (isActive) {
+                    img.src = "/assets/check_box.png";
+                    taskFound.done = true;
+                } else {
+                    img.src = "/assets/uncheck-box.png";
+                    taskFound.done = false;
+                }
+                localStorage.setItem("task", JSON.stringify(allTasks));
+            }
         })
     });
 }
