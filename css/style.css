@@ -77,7 +77,7 @@ form {
 
 
 
-li {
+.showTasks li {
     background-color: var(--tags-color);
     display: flex;
     width: 16rem;

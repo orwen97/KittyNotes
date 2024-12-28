@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         showTasks.innerHTML += `<li id = "list-${newTask.id}">
                                     <img src= "${newTask.done ? '/assets/check_box.png' : '/assets/uncheck-box.png'}" class= "uncheck">
                                     <p>${newTask.description}</p>
-                                    <p>${newTask.id}</p>
                                     <img src="/assets/delete-icon.png" class= "delete">
                                 </li>`;
     });
@@ -66,9 +65,8 @@ btnAdd.addEventListener("click", (event) => {
 
     allTasks.forEach(newTask => {
         showTasks.innerHTML += `<li id = "list-${newTask.id}">
-                                    <img src= "/assets/uncheck-box.png" class= "uncheck">
+                                    <img src= "${newTask.done ? '/assets/check_box.png' : '/assets/uncheck-box.png'}" class= "uncheck">
                                     <p>${newTask.description}</p>
-                                    <p>${newTask.id}</p>
                                     <img src="/assets/delete-icon.png" class= "delete">
                                 </li>`;
     });
