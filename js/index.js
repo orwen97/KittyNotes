@@ -17,12 +17,10 @@
 // console.log(allTask)
 
 class Task {
-    constructor(description) {
-            this.description = description,
+    constructor(description, id) {
+            this.description = description
+            this.id = id;
             this.done = false;
-    }
-    taskDone() {
-        this.done = true;
     }
 }
 
@@ -35,16 +33,24 @@ const inputTask = document.querySelector("#task");
 const btnAdd = document.querySelector(".btnAdd");
 const showTasks = document.querySelector(".showTasks")
 const endBtn = document.querySelector("#endBtn");
+const check = document.querySelector(".check");
+const deleted = document.querySelector(".delete");
 
 //get back Storage on dom
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", (event) => {
     const storedTasks = JSON.parse(localStorage.getItem("task")) || [];
     allTasks.push(...storedTasks);
     showTasks.innerHTML = "";
-    allTasks.forEach(task => {
-        showTasks.innerHTML += `<li>${task.description}</li>`;
+    allTasks.forEach(newTask => {
+        showTasks.innerHTML += `<li id = "list">
+                                    <img src= "/assets/uncheck-box.png" class= "uncheck">
+                                    <p>${newTask.description}</p>
+                                    <p>${newTask.id}</p>
+                                    <img src="/assets/delete-icon.png" class= "delete">
+                                </li>`;
     });
+    addUncheckListener();
 })
 
 //Print of inputs on DOM
@@ -52,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 btnAdd.addEventListener("click", (event) => {
     event.preventDefault();
     let inputTaskValue = inputTask.value;
-    const newTask = new Task(inputTaskValue);
+    const newTask = new Task(inputTaskValue, allTasks.length);
     allTasks.push(newTask);
     form.reset();
     localStorage.setItem("task", JSON.stringify(allTasks));
@@ -62,11 +68,13 @@ btnAdd.addEventListener("click", (event) => {
 
     allTasks.forEach(newTask => {
         showTasks.innerHTML += `<li id = "list">
-                                    <img src="/assets/uncheck-box.png">
+                                    <img src= "/assets/uncheck-box.png" class= "uncheck">
                                     <p>${newTask.description}</p>
-                                    <img src="/assets/delete-icon.png">
+                                    <p>${newTask.id}</p>
+                                    <img src="/assets/delete-icon.png" class= "delete">
                                 </li>`;
     });
+    addUncheckListener();
 });
 
 endBtn.addEventListener("click", (event) => {
@@ -74,3 +82,18 @@ endBtn.addEventListener("click", (event) => {
     showTasks.innerHTML = ` `;
     allTasks = [];
 })
+ // toggle check-uncheck tasks
+
+function addUncheckListener() {
+    const uncheck = document.querySelectorAll(".uncheck");
+    uncheck.forEach(img => {
+        img.addEventListener("click", function(event) {
+            const isActive = img.classList.toggle('active');
+            if (isActive) {
+                img.src = "/assets/check_box.png";
+            } else {
+                img.src = "/assets/uncheck-box.png";
+            };
+        })
+    });
+}
