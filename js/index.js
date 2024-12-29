@@ -1,21 +1,3 @@
-// this block is about how it started the note-cats idea while i was learning Js
-
-// let task;
-// let newTask;
-// let allTask = []
-
-// function addTask() {
-//     task = prompt("Add a new task for today:");
-//     return task;
-// };
-
-// do {
-//     addTask();
-//     allTask.push(task);
-//     newTask = prompt("do you want to add another task? (yes / no)").toLowerCase();
-// } while(newTask === "yes");
-// console.log(allTask)
-
 class Task {
     constructor(description, id) {
             this.description = description
@@ -33,8 +15,7 @@ const inputTask = document.querySelector("#task");
 const btnAdd = document.querySelector(".btnAdd");
 const showTasks = document.querySelector(".showTasks")
 const endBtn = document.querySelector("#endBtn");
-const check = document.querySelector(".check");
-const deleted = document.querySelector(".delete");
+
 
 //get back Storage on dom
 
@@ -44,18 +25,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
     showTasks.innerHTML = "";
     allTasks.forEach(newTask => {
         showTasks.innerHTML += `<li id = "list-${newTask.id}">
-                                    <img src= "${newTask.done ? '/assets/check_box.png' : '/assets/uncheck-box.png'}" class= "uncheck">
+                                    <img src= "${newTask.done ? './assets/check_box.png' : './assets/uncheck-box.png'}" class= "uncheck">
                                     <p>${newTask.description}</p>
-                                    <img src="/assets/delete-icon.png" class= "delete">
+                                    <img src="./assets/delete-icon.png" class= "delete">
                                 </li>`;
     });
     addUncheckListener();
+    deleteListener();
 })
 
 //Print of inputs on DOM
 
 btnAdd.addEventListener("click", (event) => {
     event.preventDefault();
+    if(inputTask.value.length <5) {
+        alert("Task description must be at least 5 characters long.");
+        return;
+    }
     let inputTaskValue = inputTask.value;
     const newTask = new Task(inputTaskValue, allTasks.length);
     allTasks.push(newTask);
@@ -65,12 +51,13 @@ btnAdd.addEventListener("click", (event) => {
 
     allTasks.forEach(newTask => {
         showTasks.innerHTML += `<li id = "list-${newTask.id}">
-                                    <img src= "${newTask.done ? '/assets/check_box.png' : '/assets/uncheck-box.png'}" class= "uncheck">
+                                    <img src= "${newTask.done ? './assets/check_box.png' : './assets/uncheck-box.png'}" class= "uncheck">
                                     <p>${newTask.description}</p>
-                                    <img src="/assets/delete-icon.png" class= "delete">
+                                    <img src="./assets/delete-icon.png" class= "delete">
                                 </li>`;
     });
     addUncheckListener();
+    deleteListener();
 });
 
 endBtn.addEventListener("click", (event) => {
@@ -100,4 +87,23 @@ function addUncheckListener() {
             }
         })
     });
+}
+
+//delete button function
+
+function deleteListener() {
+    const deleted = document.querySelectorAll(".delete");
+    
+    deleted.forEach(img => {
+        img.addEventListener("click", event => {
+            const taskId = img.parentElement.id;
+            const taskFound = allTasks.find(i => `list-${i.id}` === taskId);
+            if(taskFound !== -1) {
+                allTasks.splice(taskFound, 1);
+                localStorage.setItem("task", JSON.stringify(allTasks));
+            }
+            img.parentElement.remove();
+        })
+    })
+
 }
