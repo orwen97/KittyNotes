@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 btnAdd.addEventListener("click", (event) => {
     event.preventDefault();
-    if(inputTask.value.length <5) {
-        alert("Task description must be at least 5 characters long.");
+    if(inputTask.value.length <2) {
+        alert("Task description must be at least 2 characters long.");
         return;
     }
     let inputTaskValue = inputTask.value;
