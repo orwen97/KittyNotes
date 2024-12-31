@@ -15,6 +15,8 @@ const inputTask = document.querySelector("#task");
 const btnAdd = document.querySelector(".btnAdd");
 const showTasks = document.querySelector(".showTasks")
 const endBtn = document.querySelector("#endBtn");
+const newBtn = document.querySelector("#newBtn");
+const btnCancel = document.querySelector(".btnCancel");
 
 
 //get back Storage on dom
@@ -105,5 +107,19 @@ function deleteListener() {
             img.parentElement.remove();
         })
     })
-
 }
+
+//new button modal pop up
+
+newBtn.addEventListener("click", ()=> {
+    form.classList.add('active');
+})
+
+btnCancel.addEventListener("click", (e)=> {
+    e.preventDefault();
+    form.classList.remove('active');
+})
+
+btnAdd.addEventListener("click", ()=> {
+    form.classList.remove('active');
+})
