@@ -77,10 +77,10 @@ function addUncheckListener() {
             const taskFound = allTasks.find(i => `list-${i.id}` === taskId);
             if(taskFound) {
                 if (isActive) {
-                    img.src = "/assets/check_box.png";
+                    img.src = "./assets/check_box.png";
                     taskFound.done = true;
                 } else {
-                    img.src = "/assets/uncheck-box.png";
+                    img.src = "./assets/uncheck-box.png";
                     taskFound.done = false;
                 }
                 localStorage.setItem("task", JSON.stringify(allTasks));
