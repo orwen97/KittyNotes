@@ -130,7 +130,7 @@ btnCancel.addEventListener("click", (e)=> {
     modal.classList.remove('active');
 })
 
-// event listeners nav bar
+//event listeners nav bar
 // const toDo = document.querySelector(".to-do");
 // toDo.addEventListener("click", ()=> {
 //     toDo.classList.add('active');
