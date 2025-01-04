@@ -17,6 +17,7 @@ const showTasks = document.querySelector(".showTasks")
 const endBtn = document.querySelector("#endBtn");
 const newBtn = document.querySelector("#newBtn");
 const btnCancel = document.querySelector(".btnCancel");
+const modal = document.querySelector(".modal");
 
 
 //get back Storage on dom
@@ -40,10 +41,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 btnAdd.addEventListener("click", (event) => {
     event.preventDefault();
-    if(inputTask.value.length <2) {
-        alert("Task description must be at least 2 characters long.");
+    const errorMessage = document.querySelector(".error-message");
+    if(inputTask.value.length < 1) {
+        errorMessage.style.display = "block";
         return;
     }
+    
+    errorMessage.style.display = "none";
+
     let inputTaskValue = inputTask.value;
     const newTask = new Task(inputTaskValue, allTasks.length);
     allTasks.push(newTask);
@@ -60,6 +65,9 @@ btnAdd.addEventListener("click", (event) => {
     });
     addUncheckListener();
     deleteListener();
+
+    form.classList.remove('active');
+    modal.classList.remove('active');
 });
 
 endBtn.addEventListener("click", (event) => {
@@ -113,13 +121,17 @@ function deleteListener() {
 
 newBtn.addEventListener("click", ()=> {
     form.classList.add('active');
+    modal.classList.add('active');
 })
 
 btnCancel.addEventListener("click", (e)=> {
     e.preventDefault();
     form.classList.remove('active');
+    modal.classList.remove('active');
 })
 
-btnAdd.addEventListener("click", ()=> {
-    form.classList.remove('active');
-})
+// event listeners nav bar
+// const toDo = document.querySelector(".to-do");
+// toDo.addEventListener("click", ()=> {
+//     toDo.classList.add('active');
+// })

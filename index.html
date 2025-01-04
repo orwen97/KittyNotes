@@ -16,24 +16,27 @@
         <nav>
             <div class="navBar">
                 <ul>
-                    <li><a href="#">To-do list</a></li>
-                    <li><a href="">Notes</a></li>
-                    <li><a href="">Favorites</a></li>
-                    <li><a href="">Settings</a></li>
+                    <li><a href="#" class="to-do">To-do list</a></li>
+                    <li><a href="" class="notes">Notes</a></li>
+                    <li><a href="" class="favorites">Favorites</a></li>
+                    <li><a href="" class="settings">Settings</a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
-        <form method="POST" id="form">
-            <h2 class="formTitle">Describe your day's task!</h2>
-            <label for="task" class="labelTask">New Task</label>
-            <input type="text" id="task" name="task" placeholder="" maxlength="20">
-            <div class="button-container">
-                <button class="btnAdd" type="submit">Add</button>
-                <button class="btnCancel">Cancel</button>
-            </div>
-        </form>
+        <div class="modal">
+            <form method="POST" id="form">
+                <h2 class="formTitle">Describe your day's task!</h2>
+                <label for="task" class="labelTask">New Task</label>
+                <input type="text" id="task" name="task" required>
+                <span class="error-message">The task description cannot be empty</span>
+                <div class="button-container">
+                    <button class="btnAdd" type="submit">Add</button>
+                    <button class="btnCancel">Cancel</button>
+                </div>
+            </form>
+        </div>
         <h3 class="subtitle">Let's Go!</h3>
         <section>
             <ul class="showTasks">
